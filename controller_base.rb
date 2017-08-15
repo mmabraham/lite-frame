@@ -22,10 +22,6 @@ class ControllerBase
     flash.store_flash(@res)
   end
 
-  def already_built_response?
-    @already_built_response
-  end
-
   def render_content(content, content_type = 'text/html')
     prevent_double_render!
     @res['Content-Type'] = content_type
@@ -36,9 +32,11 @@ class ControllerBase
   end
 
   def render(template_name)
-    path = "views/#{self.class.to_s.underscore}/#{template_name}.html.erb"
-    erb_string = File.read(path)
+    path = "views/" +
+      self.class.to_s.underscore.sub('_controller', '') +
+      "/#{template_name}.html.erb"
 
+    erb_string = File.read(path)
     html_string = ERB.new(erb_string).result(binding)
     render_content(html_string, 'text/html')
   end
@@ -52,15 +50,16 @@ class ControllerBase
   end
 
   private
+  def already_built_response?
+    @already_built_response
+  end
 
   def prevent_double_render!
     if already_built_response?
       raise DoubleRenderError.new('you can\'t render twice')
     end
-
     @already_built_response = true
   end
-
 end
 
 class DoubleRenderError < StandardError
