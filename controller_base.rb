@@ -26,7 +26,7 @@ class ControllerBase
     @already_built_response
   end
 
-  def render_content(content, content_type)
+  def render_content(content, content_type = 'text/html')
     prevent_double_render!
     @res['Content-Type'] = content_type
     @res.write(content)
