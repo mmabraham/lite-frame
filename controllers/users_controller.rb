@@ -1,9 +1,9 @@
 class UsersController < ControllerBase
   def index
-    render_content '--- INDEX ---'
+    render 'index'
   end
 
   def show
-    render_content '--- SHOW ---'
+    render_content "--- SHOW --- #{params['id']}"
   end
 end

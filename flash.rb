@@ -9,7 +9,7 @@ class Flash
   end
 
   def now
-    @now
+    now
   end
 
   def [](key)
