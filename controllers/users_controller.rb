@@ -1,4 +1,5 @@
 class UsersController < ControllerBase
+
   def index
     render 'index'
   end

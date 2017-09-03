@@ -26,7 +26,7 @@ end.to_app
 case ARGV[0]
   when 'server'
     Rack::Server.start(
-      app: error_handler,
+      app: app,
       Port: ARGV[1] || 3000
     )
 end
