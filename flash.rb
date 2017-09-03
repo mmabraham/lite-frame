@@ -8,10 +8,6 @@ class Flash
     @now = {}
   end
 
-  def now
-    now
-  end
-
   def [](key)
     now[key] || current_cookie[key.to_s] || prev_cookie[key.to_s]
   end

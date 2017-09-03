@@ -1,6 +1,7 @@
 require 'rack'
 require_relative 'router'
 require_relative 'controller_base'
+require_relative 'show_exceptions'
 
 Dir.new('controllers')
   .each { |f| require_relative "controllers/#{f}" unless f[0] == '.'}
@@ -17,10 +18,15 @@ app = Proc.new do |env|
   res.finish
 end
 
+app = Rack::Builder.new do
+  use ShowExceptions
+  run app
+end.to_app
+
 case ARGV[0]
   when 'server'
     Rack::Server.start(
-      app: app,
+      app: error_handler,
       Port: ARGV[1] || 3000
     )
 end
