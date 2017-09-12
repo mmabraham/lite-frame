@@ -1,0 +1,11 @@
+
+<%= @error.class %>
+<%= @error.message %>
+<br />
+  <% @lines.each_with_index do |line, idx| %>
+    <% next if idx < @line_num - 5 || idx > @line_num + 3 %>
+    <% prefix = (@line_num == idx + 1) ? '-->' : '   '%>
+    <pre><%= prefix + line %></pre>
+  <% end %>
+<br />
+<%= @error.backtrace.join('<br />'.html_safe) %>

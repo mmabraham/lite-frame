@@ -32,7 +32,7 @@ class ControllerBase
   end
 
   def render(template_name)
-    path = "views/" +
+    path = "app/views/" +
       self.class.to_s.underscore.sub('_controller', '') +
       "/#{template_name}.html.erb"
 

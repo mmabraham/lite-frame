@@ -1,15 +1,15 @@
 require 'rack'
-require_relative 'router'
-require_relative 'controller_base'
-require_relative 'show_exceptions'
+require_relative 'lib/router'
+require_relative 'lib/controller_base'
+require_relative 'lib/show_exceptions'
 
-Dir.new('controllers')
-  .each { |f| require_relative "controllers/#{f}" unless f[0] == '.'}
+Dir.new('app/controllers')
+  .each { |f| require_relative "app/controllers/#{f}" unless f[0] == '.'}
 
 def router
   @router ||= Router.new
 end
-load 'routes.rb'
+load 'app/routes.rb'
 
 app = Proc.new do |env|
   req = Rack::Request.new(env)
