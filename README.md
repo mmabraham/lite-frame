@@ -65,6 +65,7 @@ For persisting data for a single request-response cycle
 ## views
 
 Views are written in erb. The folder and file names should match that of the corresponding controller and action.
+Any instance variables defined in the controller will be available from the views.
 
 example:
 ```html
